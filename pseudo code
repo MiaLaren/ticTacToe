@@ -1,0 +1,51 @@
+START
+
+DISPLAY "Enter board size (3–10): "
+READ size
+
+IF size < 3 OR size > 10
+    DISPLAY "Invalid size"
+    END PROGRAM
+END IF
+
+CREATE 2D array board[size][size]
+INITIALIZE all cells to '-'
+
+SET currentPlayer = 'X'
+SET moves = 0
+SET maxMoves = size * size
+
+WHILE moves < maxMoves
+
+    DISPLAY board
+
+    DISPLAY "Player " + currentPlayer + ", enter row and column: "
+    READ row, col
+
+    IF row or col out of bounds OR board[row][col] is not empty
+        DISPLAY "Invalid move, try again"
+        CONTINUE LOOP
+    END IF
+
+    PLACE currentPlayer in board[row][col]
+    moves = moves + 1
+
+    IF checkWin(board, size, currentPlayer) == true
+        DISPLAY board
+        DISPLAY "Player " + currentPlayer + " wins!"
+        END PROGRAM
+    END IF
+
+    // Switch player
+    IF currentPlayer == 'X'
+        currentPlayer = 'O'
+    ELSE
+        currentPlayer = 'X'
+    END IF
+
+END WHILE
+
+DISPLAY board
+DISPLAY "It's a draw!"
+
+END PROGRAM
